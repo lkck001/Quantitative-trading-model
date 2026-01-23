@@ -1,0 +1,31 @@
+# Data
+Data/
+*.csv
+*.xls
+*.xlsx
+*.h5
+*.pkl
+
+# Logs
+logs/
+*.log
+
+# Virtual Environment
+Trading/
+venv/
+env/
+.env
+
+# IDE
+.idea/
+.vscode/
+.trae/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/

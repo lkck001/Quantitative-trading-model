@@ -1,0 +1,8 @@
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+scipy>=1.10.0
+ccxt>=4.0.0
+fastdtw>=0.3.4
+mplfinance>=0.12.9b7
+ta-lib-bin; platform_system == 'Windows'
