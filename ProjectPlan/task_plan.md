@@ -53,7 +53,9 @@ Phase 1.5 (系统设计与理论内化)
 - [ ] [A] [I] **开源项目深度调研 (Open Source Research)**
         - [x] 使用 Manus AI 调研三大痛点: ZigZag 防重绘、形态识别算法、MT4-Python 桥接 (ZeroMQ)
         - [x] 分析报告: 筛选 Top 3 可用库并制定集成方案 @docs/References/opensource_research_report.md
-        - [ ] **可视化复盘器调研**: 使用 Manus 寻找支持单步调试和动态绘图的 Python 库 (finplot, lightweight-charts 等)。
+        - [ ] **可视化复盘器调研 (Visual Replayer Research)**: 
+            - [ ] **任务**: 使用 Manus 寻找支持单步调试和动态绘图的 Python 库 (finplot, lightweight-charts 等)。
+            - [ ] **目标**: 寻找能完美复刻 MT4/复盘大师体验的开源方案。
     - [ ] [A] [I] **构建历史问题解决库 (Solution Bank Construction)**
     - [ ] [M] 创建 `docs/Agent_Core/solution_bank.json` 并初始化
     - [ ] [M] 实现写入脚本 `record_solution.py` 和读取脚本 `search_solution.py`
@@ -68,13 +70,14 @@ Phase 1.5 (系统设计与理论内化)
             - [x] 标准化图像命名规范 (YYYYMM-NN-Market.png)
     - [ ] 设计状态机 (StateMachine) 逻辑: 能量释放 -> 积累 -> 触发
     - [ ] 制定数据流标准 (Data Flow Standard): MT4 -> ZMQ -> Python
-- [ ] [A] [M] **构建可视化行情回放器 (Visual Market Replayer MVP)**
-        - [ ] **目标**: 模拟复盘大师/MT4 体验，支持单步调试，实现“所见即所得”的算法验证。
-        - [ ] 实现 CSV 数据加载与步进器 (Step-by-Step Iterator)
-        - [ ] **可视化控制台 (Visual Console)**:
-            - [ ] 使用 `matplotlib` 交互模式实现动态 K 线绘图
-            - [ ] 实时叠加 ZigZag 连线与形态标注 (验证防重绘逻辑)
-            - [ ] 添加交互控制: [下一步], [暂停], [快进]
+- [ ] [A] [M] **构建可视化行情回放器 (Visual Market Replayer MVP)** (Pending Research)
+    - [ ] **前置条件**: 完成 Manus 调研并确定技术栈 (lightweight-charts vs 其他)。
+    - [ ] **目标**: 模拟复盘大师/MT4 体验，支持单步调试，实现“所见即所得”的算法验证。
+    - [ ] 实现 CSV 数据加载与步进器 (Step-by-Step Iterator)
+    - [ ] **可视化控制台 (Visual Console)**:
+        - [ ] 使用选定的绘图库 (e.g. lightweight-charts) 实现动态 K 线绘图
+        - [ ] 实时叠加 ZigZag 连线与形态标注 (验证防重绘逻辑)
+        - [ ] 添加交互控制: [下一步], [暂停], [快进]
     - [ ] **机械层 (Mechanical Layer)**:
         - [ ] 集成 `jbn/ZigZag` 实现实时计算可视化
         - [ ] 集成 `chart_patterns` 实现初步形态筛选 (Flag/Triangle)
