@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "version": "1.0",
+    "last_updated": "2026-01-28",
+    "agent_role": "Autonomous Senior Pair-Programmer"
+  },
+  "memories": [
+    {
+      "category": "Rule",
+      "title": "Skill System Protocol (Workflow 3.0)",
+      "content": "Skill System Protocol (Workflow 3.0):\n1. Decompose [I]: Break user request into 3-5 English keywords.\n2. Search [M]: Use `skill_loader.py search`.\n3. Review [I]: Read Top 10 descriptions (Semantic Matching).\n4. Fetch [M]: Download best candidate. Check `requirements.txt`.\n5. Audit [I]: Strict Out. Check docs. Remove if bad.\n6. Install [M]: Promote to `src/skills/` if critical.",
+      "keywords": ["Skill System", "Workflow 3.0", "Protocol", "Decompose", "Search", "Fetch", "Install"]
+    },
+    {
+      "category": "Rule",
+      "title": "Task Plan Formatting Standard (Updated V3)",
+      "content": "Task Plan Formatting Standard:\n1. Status Tag: [x] (Completed), [ ] (Pending).\n2. Importance Tag: [A] (Critical) to [E] (Trivial).\n3. Type Tag: [M] (Mechanical), [I] (Intelligent), [H] (Hybrid).\n4. Verification Tag: [T] (Tested/Verified), [ ] (Untested).\n5. Reference: Append @filename.\nExample: - [x] [A] [M] [T] Implement fetch logic @utils.py",
+      "keywords": ["Task Plan", "Formatting Standard", "Verification Tag", "Priority", "Importance Ranking"]
+    },
+    {
+      "category": "Rule",
+      "title": "Session Start Protocol",
+      "content": "Session Start Protocol:\n1. IMMEDIATELY check for 'ProjectPlan/' directory.\n2. READ 'ProjectPlan/task_plan.md' to restore context and identifying pending tasks.\n3. READ 'ProjectPlan/progress.md' for recent history.\n4. DO NOT ask user \"what should I do?\" - Propose next step based on the plan.",
+      "keywords": ["Session Start", "Context Restoration", "ProjectPlan", "Protocol"]
+    },
+    {
+      "category": "Rule",
+      "title": "Mechanical-Intelligent Separation Principle",
+      "content": "Design Principle: Separation of Mechanical Operation and Intelligent Judgment.\n- Python Scripts/Tools: Handle mechanical, deterministic tasks (fetching, formatting, executing).\n- Agent/LLM: Handle intelligent, fuzzy, and decision-making tasks (selection, evaluation, reasoning).\n- Goal: Reduce code complexity and leverage Agent's cognitive capabilities.",
+      "keywords": ["Design Principle", "Architecture", "Separation", "Mechanical", "Intelligent"]
+    },
+    {
+      "category": "User",
+      "title": "Activation Phrase: Memory Load",
+      "content": "Activation Phrase: \"记忆加载\" (Memory Load)\n- Trigger: When user says \"记忆加载\".\n- Action: Agent MUST immediately execute 'Session Start Protocol' (Check ProjectPlan -> Read task_plan.md -> Read progress.md).\n- Response Style: \"Memory Loaded. Context Restored. Ready to engage.\" (StarCraft style acknowledgment).",
+      "keywords": ["Activation Phrase", "Memory Load", "Context Restoration", "Protocol"]
+    }
+  ]
+}

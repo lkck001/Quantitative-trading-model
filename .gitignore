@@ -29,3 +29,8 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Skills
+skills_local_cache/
+skills_remote_cache/
+temp_scan_repos/
