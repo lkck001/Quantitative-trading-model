@@ -34,3 +34,4 @@ __pycache__/
 skills_local_cache/
 skills_remote_cache/
 temp_scan_repos/
+temp_check_clone/
