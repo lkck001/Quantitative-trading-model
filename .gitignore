@@ -5,6 +5,10 @@ Data/
 *.xlsx
 *.h5
 *.pkl
+*.json
+!skills_index.json
+!core_memory.json
+!solution_bank.json
 
 # Logs
 logs/
@@ -30,8 +34,20 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
-# Skills
+# Skills Cache (Local & Remote)
 skills_local_cache/
 skills_remote_cache/
 temp_scan_repos/
 temp_check_clone/
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MT5
+*.ex5

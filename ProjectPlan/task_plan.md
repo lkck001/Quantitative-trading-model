@@ -53,10 +53,29 @@ Phase 1.5 (系统设计与理论内化)
 - [ ] [A] [I] **开源项目深度调研 (Open Source Research)**
         - [x] 使用 Manus AI 调研三大痛点: ZigZag 防重绘、形态识别算法、MT4-Python 桥接 (ZeroMQ)
         - [x] 分析报告: 筛选 Top 3 可用库并制定集成方案 @docs/References/opensource_research_report.md
-        - [ ] **可视化复盘器调研 (Visual Replayer Research)**: 
-            - [ ] **任务**: 使用 Manus 寻找支持单步调试和动态绘图的 Python 库 (finplot, lightweight-charts 等)。
-            - [ ] **目标**: 寻找能完美复刻 MT4/复盘大师体验的开源方案。
-    - [ ] [A] [I] **构建历史问题解决库 (Solution Bank Construction)**
+        - [x] **可视化复盘器调研 (Visual Replayer Research)**: 
+        - [x] **任务**: 使用 Manus 寻找支持单步调试和动态绘图的 Python 库 (finplot, lightweight-charts 等)。
+        - [x] **目标**: 寻找能完美复刻 MT4/复盘大师体验的开源方案。-> 选中 `lightweight-charts-python`。
+        - [x] **Pivot (战略转型)**: 发现 Python GUI 库无法满足“可控复盘”需求，转向 **MT5 桥接方案**。
+- [ ] [A] [I] **构建可视化行情回放器 (Visual Market Replayer MVP)**
+    - [x] **架构重构**: 放弃 `lightweight-charts`，采用 **Python (Brain) + MT5 (Screen)** 架构。
+    - [x] **技术验证**:
+        - [x] 验证 Python `MetaTrader5` 库连接实盘 (Success)。
+        - [x] 验证 Named Pipe (命名管道) 通信 (Success)。
+        - [x] 建立 MQL5 <-> VS Code 实时同步开发环境 (Success)。
+    - [x] **EA 基础建设**:
+        - [x] 创建 `MT5_EnergyTrading` EA。
+        - [x] 实现管道通信与指令解析 (`VLINE`, `SET_RANGE`, `MSG`)。
+        - [x] 实现实时行情投喂指令 (`ADD_BAR`)。
+        - [ ] 实现高级绘图指令 (`DRAW_LINE`, `ZIGZAG`)。
+    - [ ] **Python 控制台开发**:
+        - [x] 编写 `interactive_replay.py` (MVP) 实现基础跳转。
+        - [x] 编写 `feed_replay.py` 实现 3秒/根 K线投喂模拟。
+        - [ ] 优化 `PipeController` (管道自动清理/重连)。
+        - [ ] 实现 ZigZag 算法与 MT5 绘图指令的实时映射。
+    - [ ] **全流程联调**:
+        - [ ] 在 MT5 策略测试器中跑通 "Python 指挥 -> MT5 画线 -> 暂停 -> 下一步" 的完整闭环。
+- [ ] [A] [I] **构建历史问题解决库 (Solution Bank Construction)**
     - [ ] [M] 创建 `docs/Agent_Core/solution_bank.json` 并初始化
     - [ ] [M] 实现写入脚本 `record_solution.py` 和读取脚本 `search_solution.py`
     - [ ] [I] 录入首批关键技术决策 (MT4桥接方案, ZigZag回测原则)
@@ -70,21 +89,6 @@ Phase 1.5 (系统设计与理论内化)
             - [x] 标准化图像命名规范 (YYYYMM-NN-Market.png)
     - [ ] 设计状态机 (StateMachine) 逻辑: 能量释放 -> 积累 -> 触发
     - [ ] 制定数据流标准 (Data Flow Standard): MT4 -> ZMQ -> Python
-- [ ] [A] [M] **构建可视化行情回放器 (Visual Market Replayer MVP)** (Pending Research)
-    - [ ] **前置条件**: 完成 Manus 调研并确定技术栈 (lightweight-charts vs 其他)。
-    - [ ] **目标**: 模拟复盘大师/MT4 体验，支持单步调试，实现“所见即所得”的算法验证。
-    - [ ] 实现 CSV 数据加载与步进器 (Step-by-Step Iterator)
-    - [ ] **可视化控制台 (Visual Console)**:
-        - [ ] 使用选定的绘图库 (e.g. lightweight-charts) 实现动态 K 线绘图
-        - [ ] 实时叠加 ZigZag 连线与形态标注 (验证防重绘逻辑)
-        - [ ] 添加交互控制: [下一步], [暂停], [快进]
-    - [ ] **机械层 (Mechanical Layer)**:
-        - [ ] 集成 `jbn/ZigZag` 实现实时计算可视化
-        - [ ] 集成 `chart_patterns` 实现初步形态筛选 (Flag/Triangle)
-    - [ ] **智能层 (Intelligent Layer)**:
-        - [ ] 设计 Prompt 模板: 注入形态截图/坐标 + 趋势背景
-        - [ ] 实现 LLM 接口: 调用 Agent 进行二次确权 (Valid/Invalid)
-    - [ ] 验证 ZigZag 重绘现象与防重绘逻辑
 - **状态:** 进行中 (in_progress)
 
 ### 第二阶段: 数据与核心策略迁移 (Phase 2)

@@ -1,6 +1,11 @@
 # Memory Index (记忆索引)
 
-> **Protocol**: Agent 在启动 Session 时，**仅**读取此索引文件。根据任务需求，通过文件路径按需加载具体文档。
+> **Protocol**: Agent 在启动 Session 时，**必须** 优先读取 [`SESSION_RESTORE_PROTOCOL.md`](SESSION_RESTORE_PROTOCOL.md) 恢复上下文，然后读取此索引文件。
+
+## 0. 关键协议 (Critical Protocols)
+| 文件路径 | 摘要/用途 | 关键标签 |
+| :--- | :--- | :--- |
+| [`docs/Agent_Core/SESSION_RESTORE_PROTOCOL.md`](SESSION_RESTORE_PROTOCOL.md) | **[最高优先级]** 记忆恢复与会话启动协议。定义了当前项目状态与启动仪式。 | **Restore**, Protocol, Start |
 
 ## 1. 项目规划 (Project Planning)
 | 文件路径 | 摘要/用途 | 关键标签 |
