@@ -19,13 +19,13 @@ def run_server():
     print("✅ MT5 Connected!")
     
     # 1. Send Text Message
-    msg = "MSG|System Check: OK"
+    msg = "MSG|System Check: OK\n"
     print(f"Sending: {msg}")
     win32file.WriteFile(pipe, msg.encode('utf-8'))
     time.sleep(2)
     
     # 2. Send VLine (Visual Test) at Dummy Bar Time
-    vline = "VLINE|2024.01.01 00:00"
+    vline = "VLINE|2024.01.01 00:00\n"
     print(f"Sending: {vline}")
     win32file.WriteFile(pipe, vline.encode('utf-8'))
     time.sleep(2)

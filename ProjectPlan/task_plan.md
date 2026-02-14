@@ -67,12 +67,35 @@ Phase 1.5 (系统设计与理论内化)
         - [x] 创建 `MT5_EnergyTrading` EA。
         - [x] 实现管道通信与指令解析 (`VLINE`, `SET_RANGE`, `MSG`)。
         - [x] 实现实时行情投喂指令 (`ADD_BAR`)。
+        - [x] **EA 架构修正**:
+             - [x] [A] [H] [T] **64位句柄修复**: 修复 `kernel32` 导入导致的内存崩溃。
+             - [x] [A] [H] [T] **单窗口跳转**: 实现 EA 自动创建 `EURUSD@_2024` 并自我迁移。
+             - [x] [B] [M] [T] **纯净模式**: 移除 Launcher，保持单一图表运行。
+             - [x] [A] [H] [T] **UI 控制面板**: 实现播放/暂停按钮、速度滑块及位置记忆功能。
+            - [x] [A] [H] [T] **UI 交互优化**:
+                - [x] **面板锁定**: 移除面板拖动功能，防止误触。
+                - [x] **滑块优化**: 扩大滑块响应区域 (Hitbox) 并加宽滑块。
+                - [x] **即时持久化**: 实现滑块释放即保存 (Immediate Save) 及 `GlobalVariablesFlush`。
+                - [x] [C] [H] [T] **极简 UI 重构**: 移除冗余面板，实现 Start/Pause 单一入口逻辑。
+                - [x] [C] [H] [T] **防误触锁定**: 实现 UI 区域禁用图表拖拽 (`CHART_MOUSE_SCROLL`)。
+                - [x] [C] [H] [T] **批量加速模式**: 增加 `(x1-x10)` 步进按钮，支持单次唤醒发送 N 根 K 线，提升回放效率。
+        - [x] **生命周期自动化**:
+             - [x] **Auto-Launch**: EA 启动时自动拉起 Python 数据源。
+             - [x] **Auto-Kill**: 管道断开时 Python 自动退出，无残留。
+        - [x] **同步机制增强 (Sync V3.0)**:
+             - [x] **主动握手 (Proactive Handshake)**: MT5 连接后立即发送 `STATUS`。
+             - [x] **双模同步 (Dual-Mode)**: Python 支持被动等待握手 + 主动重试查询。
+             - [x] **M1 精度修复**: 修正时间帧锚点，由 H1 切换为 M1，解决分钟级回放进度丢失问题。
         - [ ] 实现高级绘图指令 (`DRAW_LINE`, `ZIGZAG`)。
     - [ ] **Python 控制台开发**:
-        - [x] 编写 `interactive_replay.py` (MVP) 实现基础跳转。
-        - [x] 编写 `feed_replay.py` 实现 3秒/根 K线投喂模拟。
-        - [ ] 优化 `PipeController` (管道自动清理/重连)。
+        - [x] 编写 `feed_replay.py` 实现 M1 K线投喂模拟。
+        - [x] 实现数据源自动切换 (Online/Local) 与格式兼容。
+        - [x] ~~**持久化同步**: 实现 `replay_state.json` 检查点机制~~ (已废弃: 采用 MT5 自身数据/主动握手作为单一事实来源)
         - [ ] 实现 ZigZag 算法与 MT5 绘图指令的实时映射。
+    - [x] **项目治理 (Project Governance)**:
+        - [x] [A] [M] [T] **Git 初始化**: 建立版本控制，配置 `.gitignore`。
+        - [x] [A] [M] [T] **代码清理**: 移除 `VisualReplay_MVP` 下的 10+ 个冗余脚本。
+        - [x] [B] [M] [T] **分支策略**: 建立 `main` (稳定) + `feature/draw-engine` (开发) 双分支。
     - [ ] **全流程联调**:
         - [ ] 在 MT5 策略测试器中跑通 "Python 指挥 -> MT5 画线 -> 暂停 -> 下一步" 的完整闭环。
 - [ ] [A] [I] **构建历史问题解决库 (Solution Bank Construction)**
@@ -96,20 +119,20 @@ Phase 1.5 (系统设计与理论内化)
 - [ ] 从旧代码迁移 ZigZag 算法
 - [ ] 迁移 DTW/模式匹配逻辑
 - [ ] 实现基础绘图/可视化工具
-- **状态:** 待定 (pending)
+- [ ] **状态:** 待定 (pending)
 
 ### 第三阶段: 回测引擎 (Phase 3)
 - [ ] 设计事件驱动或向量化回测引擎
 - [ ] 实现交易管理 (入场, 出场, 止损, 止盈)
 - [ ] 实现性能指标 (夏普比率, 最大回撤, 胜率)
 - [ ] 可视化回测结果
-- **状态:** 待定 (pending)
+- [ ] **状态:** 待定 (pending)
 
 ### 第四阶段: Agent 集成与优化 (Phase 4)
 - [ ] 集成科学技能进行数据分析 (EDA, 统计)
 - [ ] 实现基于 Agent 的 "智能研报" 生成
 - [ ] 优化策略参数 (使用 pymoo 或类似工具)
-- **状态:** 待定 (pending)
+- [ ] **状态:** 待定 (pending)
 
 ## 关键问题 (Key Questions)
 1. 我们应该使用现有的回测框架 (Backtrader/Lean) 还是构建自定义的轻量级框架？ (决定：首先自定义轻量级框架，以便灵活处理 ZigZag 形态)
@@ -124,14 +147,25 @@ Phase 1.5 (系统设计与理论内化)
 | 自定义文件规划 (Custom File-Based Planning) | 使用 `task_plan.md` (Manus 风格) 追踪进度，防止跨会话丢失上下文。 |
 | 严格执行协议 (Strict Execution Protocol) | 在未得到用户明确指令前，仅进行探讨，不执行代码修改。 |
 | 按需检索记忆 (On-Demand Memory Retrieval) | 从全量加载转向 `MEMORY_INDEX.md` 索引检索，解决 Token 消耗与注意力分散问题。 |
+| **MT5 桥接架构 (Bridge Architecture)** | 采用 Named Pipe 通信，EA 负责展示，Python 负责计算。避免了 Python GUI 开发的复杂度。 |
+| **单窗口体验 (Single Window UX)** | 通过 EA 自我迁移逻辑，实现 Launcher -> Target 的无缝切换，保持界面整洁。 |
+| **主动握手协议 (Proactive Handshake)** | MT5 连接后主动发送状态，替代 Python 轮询，解决同步延迟和竞态条件。 |
 
 ## 遇到的错误 (Errors Encountered)
 | 错误 | 尝试次数 | 解决方案 |
 |-------|---------|------------|
 | PermissionError (shutil.rmtree) | 1 | 添加重试逻辑和 `os.chmod` 以处理 Windows 下仓库扫描时的文件锁定问题。 |
 | pip install pypdf 路径错误 | 1 | 使用 `python -m pip` 替代直接调用 `pip`，确保安装到当前虚拟环境。 |
+| **MT5 64位句柄崩溃** | 1 | 将 EA 中所有 Kernel32 API 调用的 `int` 类型升级为 `long`，解决内存地址截断问题。 |
+| **MT5 同步失败 (Sync Timeout)** | 3 | 从“被动查询”升级为“主动握手 + 双模重试”，并增加超时时间。 |
 
 ## 7. Changelog
+- **2026-02-12**: [Feature] Implemented "Batch Mode" (x1-x10 speed) with UI controls and persistence; Fixed UI initialization bugs (Forward Declaration); Integrated CodexZH config for GPT-5.3 CLI access.
+- **2026-02-12**: [UI/UX] Refactored to "Minimalist" UI (One-Button Start); Implemented Auto-Launch/Auto-Kill lifecycle; Fixed Slider Hitbox & Drag-Lock; Added Chart Scroll Lock.
+- **2026-02-12**: Polished MT5 UI (Locked Panel, Wider Slider, Hitbox Fix); Implemented "Immediate Save" for speed settings; Fixed M1 playback sync precision; Established `!` discussion protocol.
+- **2026-02-11**: Implemented "Proactive Handshake" protocol for instant sync; Updated `feed_replay.py` to support dual-mode sync; Validated local M1 data replay.
+- **2026-02-03**: Implemented MT5 UI Control Panel (Play/Pause/Speed Slider) with position memory; Fixed button logic and drag interaction.
+- **2026-02-02**: Implemented MT5 Bridge MVP (Named Pipe), Fixed 64-bit crash, Established Git & Single Window UX.
 - **2026-01-29**: Added "Visual Market Replayer" decision and updated Phase 1.5 tasks with triangle pattern standardization.
 - **2026-01-28**: Updated Phase 1 with skill system V2.0 details.
 

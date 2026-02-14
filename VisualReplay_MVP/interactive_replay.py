@@ -69,6 +69,8 @@ class PipeController:
             return
         try:
             print(f"📤 Sending: {cmd}")
+            if not cmd.endswith("\n"):
+                cmd += "\n"
             win32file.WriteFile(self.pipe, cmd.encode('utf-8'))
         except Exception as e:
             print(f"❌ Send Error: {e}")

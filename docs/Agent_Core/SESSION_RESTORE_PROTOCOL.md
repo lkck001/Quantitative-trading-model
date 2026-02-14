@@ -11,7 +11,11 @@
     - **默认模式**: 仅处于 **"探讨与计划模式" (Discussion & Planning Mode)**。
     - 即使解决方案显而易见，也必须先**陈述计划**，然后**等待批准**。
 
-2.  **确认机制 (Confirmation Protocol)**:
+2.  **特殊前缀规则 (Prefix Rules)**:
+    - **`!` (Exclamation)**: 若用户输入以 `!` 开头，表示 **仅讨论 (Discussion Only)**。绝对禁止写代码或修改文件。
+    - **`$` (Dollar)**: (已弃用，统一使用 `!`)
+
+3.  **确认机制 (Confirmation Protocol)**:
     - 在执行任何 "Startup Ritual" 步骤前，必须先问："是否现在执行启动仪式？"
 
 ## 1. 核心身份与行为准则 (Identity & Protocol)
@@ -21,8 +25,9 @@
   1.  **严格执行协议 (Strict Execution)**: 任何代码修改或命令执行前，必须制定计划并等待用户明确指令（"执行"、"继续"）。
   2.  **实事求是**: 严禁幻觉。如果找不到文件或不确定逻辑，先读取，再回答。
   3.  **偏好**: 用户习惯手动确认关键步骤（如 MT5 编译点击绿色按钮）。
+4.  **讨论模式前缀**: 任何以 `!` 开头的输入，视为 **Discussion Only Mode**，严禁执行代码修改。
 
-## 2. 项目当前状态快照 (Project State Snapshot) - 2026-02-02
+## 2. 项目当前状态快照 (Project State Snapshot) - 2026-02-12
 **项目**: 量化交易模型 (Quantitative Trading Model) - 可视化复盘器 (Visual Market Replayer)
 
 ### 2.1 架构 (Architecture)
@@ -35,15 +40,17 @@
     - **Target (目标)**: `EURUSD@_2024`，由 EA 自动创建，初始状态为**空白** (仅含1根 Dummy Bar)。
 
 ### 2.2 关键文件 (Critical Files)
-- **EA 源码**: `MT5_Integration/MQL5_Link/MT5_EnergyTrading.mq5` (V1.70)
+- **EA 源码**: `MT5_Integration/MQL5_Link/MT5_EnergyTrading.mq5` (V1.80)
   - *关键逻辑*: `CustomRatesReplace` 强制清空历史，`ADD_BAR` 指令动态追加数据。
+  - *UI*: 面板锁定，滑块支持即时持久化 (`GlobalVariablesFlush`)。
+  - *Sync*: 使用 M1 时间帧进行高精度同步。
 - **投喂脚本**: `VisualReplay_MVP/feed_replay.py`
-  - *关键逻辑*: 读取 `Data/EURUSD@_2024_H1.csv`，每 3秒 发送一根 K线。
+  - *关键逻辑*: 读取 `Data/EURUSD@_2024_H1.csv`，支持 `SPEED` 指令动态调整回放速度。
 
 ## 3. 启动“仪式” (Startup Ritual)
 每次开始新会话时，**必须**按顺序执行以下步骤以验证环境：
 
-1.  **编译 (Compile)**: 打开 MetaEditor，选中 `MT5_EnergyTrading.mq5`，点击 **绿色编译按钮 (F7)** (确保代码最新)。
+1.  **编译 (Compile)**: 打开 MetaEditor，选中 `MT5_EnergyTrading.mq5`，点击 **绿色编译按钮 (F7)** (确保代码最新，修复了 GlobalVariablesFlush 错误)。
 2.  **启动 (Launch)**: 在 MT5 中将 EA 拖入任意图表 (Launcher)。
     - *验证*: 观察日志显示 `✅ Custom Symbol Deleted`，并弹出新的 `EURUSD@_2024` 空白图表。
 3.  **连接 (Connect)**: 在 Trae 终端运行：
@@ -53,9 +60,9 @@
     - *验证*: 终端显示 `Sending Bar...`，MT5 图表开始动态生成 K 线。
 
 ## 4. 待办任务队列 (Immediate Next Steps)
-1.  **ZigZag 算法集成**: 在 Python 端实现 ZigZag 逻辑，识别波峰波谷。
-2.  **绘图指令开发**: 在 EA 中实现 `DRAW_LINE` 指令，将 Python 识别到的形态画在 MT5 上。
-3.  **交互控制**: 增强 Python 脚本，支持键盘暂停/步进。
+1.  **验证修复**: 确认 `GlobalVariablesFlush` 编译通过，且重启后速度设置能正确保留。
+2.  **ZigZag 算法集成**: 在 Python 端实现 ZigZag 逻辑，识别波峰波谷。
+3.  **绘图指令开发**: 在 EA 中实现 `DRAW_LINE` 指令，将 Python 识别到的形态画在 MT5 上。
 
 ---
-*此文档由 Alex 在 2026-02-02 自动生成，用于锚定记忆。*
+*此文档由 Alex 在 2026-02-12 自动生成，用于锚定记忆。*
