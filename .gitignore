@@ -25,6 +25,9 @@ env/
 .vscode/
 .trae/
 
+# Agent core (deprecated)
+docs/Agent_Core/
+
 # Python cache
 __pycache__/
 *.pyc
@@ -51,3 +54,6 @@ Thumbs.db
 
 # MT5
 *.ex5
+
+# PDFs (do not track)
+*.pdf

@@ -27,7 +27,7 @@ input string   InpBaseSymbol         = "EURUSD@";     // Base Symbol (Source Spe
 // input string   InpFileName           = "EURUSD_2024_Import.csv"; // REMOVED: No longer used
 input string   InpTemplateName       = "红绿入场.tpl"; // Chart template to apply
 input string   InpTemplateAltPath    = "E:\\Quantitative trading model\\MT5_Integration\\MQL5_Link\\红绿入场.tpl"; // Fallback absolute path
-input string   InpPythonPath         = "E:\\Quantitative trading model\\VisualReplay_MVP\\launch_feed.bat"; // Launcher Batch File
+input string   InpPythonPath         = "E:\\Quantitative trading model\\src\\AsipanEnergyTradingSystem\\modules\\replay\\launch_feed.bat"; // Launcher Batch File
 input string   InpScriptPath         = ""; // Script Path (Handled by Batch File)
 
 // --- Constants ---

@@ -2,8 +2,8 @@ import os
 from pypdf import PdfReader
 
 # Configuration
-PDF_PATH = r"docs/References/爱思潘交易系统.pdf"
-BASE_DIR = r"docs/System_Architecture/Opportunity_Recognition/Triangle_Pattern_Recognition"
+PDF_PATH = r"src/AsipanEnergyTradingSystem/docs/References/爱思潘交易系统.pdf"
+BASE_DIR = r"src/AsipanEnergyTradingSystem/docs/System_Architecture/Opportunity_Recognition/Triangle_Pattern_Recognition"
 TEXT_DIR = os.path.join(BASE_DIR, "text")
 IMG_DIR = os.path.join(BASE_DIR, "images")
 

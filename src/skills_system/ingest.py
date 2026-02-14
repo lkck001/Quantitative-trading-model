@@ -1,8 +1,8 @@
 from pypdf import PdfReader
 import os
 
-pdf_path = "docs/爱思潘交易系统.pdf"
-output_path = "docs/book_summary.md"
+pdf_path = "src/AsipanEnergyTradingSystem/docs/References/爱思潘交易系统.pdf"
+output_path = "src/AsipanEnergyTradingSystem/docs/References/book_summary.md"
 
 if not os.path.exists(pdf_path):
     print(f"Error: {pdf_path} not found.")

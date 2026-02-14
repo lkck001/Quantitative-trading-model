@@ -1,0 +1,6 @@
+/*
+
+ */
+lightweight-charts
+pandas
+numpy
