@@ -75,10 +75,12 @@ Phase 1.5 (系统设计与理论内化)
             - [x] [A] [H] [T] **UI 交互优化**:
                 - [x] **面板锁定**: 移除面板拖动功能，防止误触。
                 - [x] **滑块优化**: 扩大滑块响应区域 (Hitbox) 并加宽滑块。
+                - [x] **滑块边界修复**: 轨道宽度一致化并限制 knob 不越界。
                 - [x] **即时持久化**: 实现滑块释放即保存 (Immediate Save) 及 `GlobalVariablesFlush`。
                 - [x] [C] [H] [T] **极简 UI 重构**: 移除冗余面板，实现 Start/Pause 单一入口逻辑。
                 - [x] [C] [H] [T] **防误触锁定**: 实现 UI 区域禁用图表拖拽 (`CHART_MOUSE_SCROLL`)。
                 - [x] [C] [H] [T] **批量加速模式**: 增加 `(x1-x10)` 步进按钮，支持单次唤醒发送 N 根 K 线，提升回放效率。
+                - [x] **批量按钮稳定性**: 离线隐藏、点击更新、持久化、重连同步，确保 UI/后端一致。
         - [x] **生命周期自动化**:
              - [x] **Auto-Launch**: EA 启动时自动拉起 Python 数据源。
              - [x] **Auto-Kill**: 管道断开时 Python 自动退出，无残留。
@@ -86,11 +88,14 @@ Phase 1.5 (系统设计与理论内化)
              - [x] **主动握手 (Proactive Handshake)**: MT5 连接后立即发送 `STATUS`。
              - [x] **双模同步 (Dual-Mode)**: Python 支持被动等待握手 + 主动重试查询。
              - [x] **M1 精度修复**: 修正时间帧锚点，由 H1 切换为 M1，解决分钟级回放进度丢失问题。
+             - [x] **管道分帧 (Pipe Framing)**: 指令统一换行分隔，MT5 端行级拆包，解决批量合并丢包。
         - [ ] 实现高级绘图指令 (`DRAW_LINE`, `ZIGZAG`)。
     - [ ] **Python 控制台开发**:
         - [x] 编写 `feed_replay.py` 实现 M1 K线投喂模拟。
         - [x] 实现数据源自动切换 (Online/Local) 与格式兼容。
         - [x] ~~**持久化同步**: 实现 `replay_state.json` 检查点机制~~ (已废弃: 采用 MT5 自身数据/主动握手作为单一事实来源)
+        - [x] **指令分隔**: 发送端统一追加 `\n`，确保批量指令可正确拆包。
+        - [x] **日志增强**: 发送日志增加 `Speed` 字段，便于诊断性能与节奏。
         - [ ] 实现 ZigZag 算法与 MT5 绘图指令的实时映射。
     - [x] **项目治理 (Project Governance)**:
         - [x] [A] [M] [T] **Git 初始化**: 建立版本控制，配置 `.gitignore`。
@@ -160,6 +165,7 @@ Phase 1.5 (系统设计与理论内化)
 | **MT5 同步失败 (Sync Timeout)** | 3 | 从“被动查询”升级为“主动握手 + 双模重试”，并增加超时时间。 |
 
 ## 7. Changelog
+- **2026-02-14**: [Stability] Fixed batch-mode command framing with newline + MT5 line parsing; Synced batch on reconnect; Slider clamp to track; Python send logs include speed; Mapped MT5 logs into project for faster diagnostics.
 - **2026-02-12**: [Feature] Implemented "Batch Mode" (x1-x10 speed) with UI controls and persistence; Fixed UI initialization bugs (Forward Declaration); Integrated CodexZH config for GPT-5.3 CLI access.
 - **2026-02-12**: [UI/UX] Refactored to "Minimalist" UI (One-Button Start); Implemented Auto-Launch/Auto-Kill lifecycle; Fixed Slider Hitbox & Drag-Lock; Added Chart Scroll Lock.
 - **2026-02-12**: Polished MT5 UI (Locked Panel, Wider Slider, Hitbox Fix); Implemented "Immediate Save" for speed settings; Fixed M1 playback sync precision; Established `!` discussion protocol.
