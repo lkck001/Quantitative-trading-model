@@ -145,7 +145,7 @@
 - **功能增强**:
   - `search`: 支持多关键词，返回 Top 10 混合结果。
   - `fetch`: 升级为只提示路径，不刷屏；增加了 `requirements.txt` 依赖检测警告。
-  - `install`: 新增长期安装功能，支持将技能提升至 `src/skills/` 并自动生成 `__init__.py`。
+  - `install`: 新增长期安装功能，支持将技能提升至 `src/skills_system/installed/` 并自动生成 `__init__.py`。
   - `remove`: 新增回滚命令。
 - **文档规范**: 
   - 全面更新了 `SKILL.md` (中文版)，定义了 Workflow 3.0。
@@ -164,11 +164,11 @@
 ### 基础设施搭建 (Infrastructure Setup)
 - 验证了项目目录结构。
 - 创建了 `requirements.txt`。
-- 实现了 `src/utils/skill_loader.py`。
+- 实现了 `src/skills_system/loader.py`。
 - 创建了 `skills_index.json`。
 
 ### 技能系统扩展 (Skill System Expansion)
-- 创建了 `scan_collections.py` 以自动化技能发现。
+- 创建了 `src/skills_system/scripts/scan_collections.py` 以自动化技能发现。
 - 扫描并索引了:
   - `openai/skills`
   - `huggingface/skills`
@@ -176,7 +176,7 @@
   - `K-Dense-AI/claude-scientific-skills` (科学工具)
   - `sickn33/antigravity-awesome-skills` (工程最佳实践)
   - `SKE-Labs/agent-trading-skills` (交易策略)
-- 修复了 `scan_collections.py` 中的 Windows 权限 Bug。
+- 修复了 `src/skills_system/scripts/scan_collections.py` 中的 Windows 权限 Bug。
 
 ### 规划系统 (Planning System)
 - 采用了 `planning-with-files` 技能方法论。

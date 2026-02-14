@@ -27,7 +27,7 @@
 
 ### 2.1 技能系统 (Skill System)
 *   **协议**: 详细的 Workflow 3.0 (宽进严出流程) 已存储在 `core_memory.json` 中的 `[Rule] Skill System Protocol`。
-*   **工具**: `src/utils/skill_loader.py`。
+*   **工具**: `src/skills_system/loader.py`。
 
 ### 2.2 核心技能库 (Core Skills)
 *   `skill_loader`: 元技能。

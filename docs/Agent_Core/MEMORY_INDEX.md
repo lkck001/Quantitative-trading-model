@@ -31,7 +31,7 @@
 ## 4. 技能系统 (Skill System)
 | 文件路径 | 摘要/用途 | 关键标签 |
 | :--- | :--- | :--- |
-| [`src/utils/skill_loader.py`](../../src/utils/skill_loader.py) | 技能加载器的源代码。实现搜索、获取、安装逻辑。 | Code, Tool, Loader |
+| [`src/skills_system/loader.py`](../../src/skills_system/loader.py) | 技能加载器的源代码。实现搜索、获取、安装逻辑。 | Code, Tool, Loader |
 | [`.trae/skills/skill-loader/SKILL.md`](../../.trae/skills/skill-loader/SKILL.md) | **[协议]** 技能系统的使用规范、工作流 3.0 与反模式警告。 | Protocol, Manual, Workflow |
 | [`skills_index.json`](../../skills_index.json) | 本地技能注册表，映射技能名称到路径/URL。 | Registry, Config |
 

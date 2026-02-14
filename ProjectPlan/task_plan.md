@@ -11,9 +11,9 @@ Phase 1.5 (系统设计与理论内化)
 ### 第一阶段: 环境与技能基础设施 (Phase 1)
 - [x] 创建项目结构 (src, docs, data, legacy)
 - [x] 设置虚拟环境和 requirements.txt
-- [x] 实现技能加载器 (Skill Loader) (src/utils/skill_loader.py)
+- [x] 实现技能加载器 (Skill Loader) (src/skills_system/loader.py)
 - [x] 创建技能索引 (Skills Index) (skills_index.json)
-- [x] 实现仓库扫描器 (Repo Scanner) (scan_collections.py)
+- [x] 实现仓库扫描器 (Repo Scanner) (src/skills_system/scripts/scan_collections.py)
 - [x] 集成社区技能库 (Community Skills)
 - [x] 集成科学计算技能库 (Scientific Skills - K-Dense-AI)
 - [x] 集成工程与反重力技能库 (Antigravity Skills - sickn33)
@@ -21,15 +21,15 @@ Phase 1.5 (系统设计与理论内化)
 - [x] 升级技能系统以兼容 SkillsMP 网站标准
     - [x] **调研与设计**: 验证 SkillsMP API 结构，确立“Agent拆解+混合搜索+双重验证”流程。
     - [x] **核心流程验证 (Core Workflow)**:
-        - [x] [A] [M] [T] 集成 API Key (`sk_live_...`) @skill_loader.py
-        - [x] [A] [M] [T] 实现混合搜索逻辑 (Local Index + Remote API) @skill_loader.py
-        - [x] [A] [H] [T] **宽进严出**: Top 10 召回 + 完整描述展示 @skill_loader.py
-        - [x] [A] [M] [T] 升级 `fetch` 支持直接 URL 下载 @skill_loader.py
-        - [x] [B] [M] [T] 实现“下载后仅提示路径” @skill_loader.py
+        - [x] [A] [M] [T] 集成 API Key (`sk_live_...`) @src/skills_system/loader.py
+        - [x] [A] [M] [T] 实现混合搜索逻辑 (Local Index + Remote API) @src/skills_system/loader.py
+        - [x] [A] [H] [T] **宽进严出**: Top 10 召回 + 完整描述展示 @src/skills_system/loader.py
+        - [x] [A] [M] [T] 升级 `fetch` 支持直接 URL 下载 @src/skills_system/loader.py
+        - [x] [B] [M] [T] 实现“下载后仅提示路径” @src/skills_system/loader.py
     - [x] **附加功能验证 (Advanced Features)**:
-        - [x] [B] [M] [T] **依赖管理**: `requirements.txt` 警告 @skill_loader.py
-        - [x] [B] [M] [T] **长期安装**: `install` 命令 + 自动 `__init__.py` @skill_loader.py
-        - [x] [C] [M] [T] 新增 `remove` 回滚命令 @skill_loader.py
+        - [x] [B] [M] [T] **依赖管理**: `requirements.txt` 警告 @src/skills_system/loader.py
+        - [x] [B] [M] [T] **长期安装**: `install` 命令 + 自动 `__init__.py` @src/skills_system/loader.py
+        - [x] [C] [M] [T] 新增 `remove` 回滚命令 @src/skills_system/loader.py
     - [x] **协议更新 (SKILL.md) - [I] 智能层定义**:
         - [x] [B] [I] [T] Agent 责任定义 (关键词拆解/语义比对/强制审核) @SKILL.md
         - [x] [C] [I] [T] **反模式警告**: 区分“探讨模式”与“执行模式” @SKILL.md

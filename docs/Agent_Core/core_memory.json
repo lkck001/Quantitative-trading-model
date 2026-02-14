@@ -8,7 +8,7 @@
     {
       "category": "Rule",
       "title": "Skill System Protocol (Workflow 3.0)",
-      "content": "Skill System Protocol (Workflow 3.0):\n1. Decompose [I]: Break user request into 3-5 English keywords.\n2. Search [M]: Use `skill_loader.py search`.\n3. Review [I]: Read Top 10 descriptions (Semantic Matching).\n4. Fetch [M]: Download best candidate. Check `requirements.txt`.\n5. Audit [I]: Strict Out. Check docs. Remove if bad.\n6. Install [M]: Promote to `src/skills/` if critical.",
+      "content": "Skill System Protocol (Workflow 3.0):\n1. Decompose [I]: Break user request into 3-5 English keywords.\n2. Search [M]: Use `python src/skills_system/loader.py search`.\n3. Review [I]: Read Top 10 descriptions (Semantic Matching).\n4. Fetch [M]: Download best candidate. Check `requirements.txt`.\n5. Audit [I]: Strict Out. Check docs. Remove if bad.\n6. Install [M]: Promote to `src/skills_system/installed/` if critical.",
       "keywords": ["Skill System", "Workflow 3.0", "Protocol", "Decompose", "Search", "Fetch", "Install"]
     },
     {
