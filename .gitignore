@@ -57,3 +57,6 @@ Thumbs.db
 
 # PDFs (do not track)
 *.pdf
+
+# MT5 caches
+MT5_Integration/MQL5_Link/.accelerate/
