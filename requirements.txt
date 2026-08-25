@@ -5,4 +5,4 @@ scipy>=1.10.0
 ccxt>=4.0.0
 fastdtw>=0.3.4
 mplfinance>=0.12.9b7
-ta-lib-bin; platform_system == 'Windows'
+# TA-Lib is optional; no current runtime code imports it.

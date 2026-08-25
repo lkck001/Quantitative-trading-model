@@ -27,6 +27,30 @@
 | `DATA_PATH` | Path to CSV data file | `../data/EURUSD_H1.csv` |
 | `ZIGZAG_DEV` | Deviation threshold | `0.0015` |
 
+## Forex Tester Data Conversion
+
+Forex Tester 2 stores imported M1 bars in `data/EditMode/<SYMBOL>/1/Bars.dat`.
+Convert a date range to the no-header, nine-column CSV format used by both the
+MT5 FULL chart and `feed_replay.py`:
+
+```powershell
+python src/AsipanEnergyTradingSystem/modules/replay/src/convert_forex_tester_bars.py `
+  "<Forex Tester>/data/EditMode/EURUSD/1/Bars.dat" `
+  Data/Local_Data/split_by_year/EURUSD_2003.csv `
+  --start 2003-01-01 --end 2003-12-31
+```
+
+Use `data/EditMode/EURUSD/1/Bars.dat` as the authoritative M1 source for the
+2002–2026 annual exports. Do not use `data/Ticks/EURUSD.dat` for this workflow;
+the inspected tick file contains only 2010 data.
+
+The converter does not overwrite an existing output unless `--overwrite` is
+provided. The output columns are:
+
+```text
+Date,Time,Open,High,Low,Close,TickVolume,RealVolume,Spread
+```
+
 ## Documentation
 
 - [Architecture Decision Record](../../../../docs/Manuals/documentation_standards.md)

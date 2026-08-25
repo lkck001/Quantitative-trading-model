@@ -1,6 +1,4 @@
-/*
-
- */
+# Visual replay module dependencies.
 lightweight-charts
 pandas
 numpy

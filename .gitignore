@@ -6,9 +6,6 @@ Data/
 *.h5
 *.pkl
 *.json
-!skills_index.json
-!core_memory.json
-!solution_bank.json
 
 # Logs
 logs/
@@ -16,6 +13,7 @@ logs/
 
 # Virtual Environment
 Trading/
+Trading_broken/
 venv/
 env/
 .env
@@ -24,9 +22,6 @@ env/
 .idea/
 .vscode/
 .trae/
-
-# Agent core (deprecated)
-docs/Agent_Core/
 
 # Python cache
 __pycache__/
@@ -38,6 +33,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Skills Cache (Local & Remote)
+.codex_tmp/
 skills_local_cache/
 skills_remote_cache/
 temp_scan_repos/
